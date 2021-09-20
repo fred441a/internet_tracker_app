@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<List<dynamic>> getSpeedData() async {
-  print(bool.hasEnvironment("IP"));
+  //TODO make enviroment variables work.
   final String ip = String.fromEnvironment("IP");
-  print("http://${ip}/internet-tracker/GetSpeedTests.php");
-  var request = http.Request(
-      'GET', Uri.parse('http://${ip}/internet-tracker/GetSpeedTests.php'));
+  var request = http.Request('GET',
+      Uri.parse('http://192.168.0.105/internet-tracker/GetSpeedTests.php'));
 
   http.StreamedResponse response = await request.send();
 
