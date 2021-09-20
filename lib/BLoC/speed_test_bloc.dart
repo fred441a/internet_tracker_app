@@ -13,4 +13,9 @@ class SpeedTestCubit extends Cubit<Map<String, dynamic>> {
     };
     emit(emitMap);
   }
+
+  void restart() async {
+    test();
+    emit({});
+  }
 }

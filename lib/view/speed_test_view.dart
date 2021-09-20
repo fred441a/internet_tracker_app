@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../BLoC//speed_test_bloc.dart';
+import '../BLoC/speed_test_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SpeedTestView extends StatelessWidget {
@@ -13,7 +13,7 @@ class SpeedTestView extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => SpeedTestCubit()..test(),
-        child: Container(),
+        child: const SpeedtestWidget(),
       ),
     );
   }
@@ -26,17 +26,27 @@ class SpeedtestWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SpeedTestCubit, Map<String, dynamic>>(
         builder: (context, state) {
-      if (state == {}) {
-        return Image.asset("assets/loading.gif");
-      }
-      return Center(
-        child: Row(
+      print(state);
+      if (state["download"] == null) {
+        return Center(
+          child: Image.asset("assets/loading.gif"),
+        );
+      } else {
+        return Center(
+            child: Column(
           children: [
-            Text("Download: ${state["download"]}"),
-            Text("Upload: ${state["upload"]}")
+            Text(
+              "Download: ${state["download"].toStringAsFixed(2).toString()} Mbits \n Upload: ${state["upload"].toStringAsFixed(2).toString()} Mbits",
+              style: TextStyle(fontSize: 25),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  context.read<SpeedTestCubit>().restart();
+                },
+                child: Text("Test Again"))
           ],
-        ),
-      );
+        ));
+      }
     });
   }
 }
