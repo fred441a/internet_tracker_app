@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'data/speed_test_data.dart';
-import 'BLoC/speed_tests_bloc.dart';
+import 'BLoC/speed_tests_history_bloc.dart';
 import 'view/chart_view.dart';
+import 'view/speed_test_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SpeedTestCubit(),
+      create: (context) => SpeedTestHistoryCubit()..init(),
       child: MaterialApp(
         title: 'Internet  Tracker',
         theme: ThemeData(
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (context) => ChartView(),
+          "/SpeedTest": (context) => SpeedTestView()
         },
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../BLoC/speed_tests_bloc.dart';
+import '../BLoC/speed_tests_history_bloc.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +12,7 @@ class ChartView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Speed Graph"),
       ),
-      body: BlocBuilder<SpeedTestCubit, List<Map<String, dynamic>>>(
+      body: BlocBuilder<SpeedTestHistoryCubit, List<Map<String, dynamic>>>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 10),
@@ -23,7 +23,9 @@ class ChartView extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "/SpeedTest");
+        },
         child: const Icon(Icons.speed),
       ),
     );
