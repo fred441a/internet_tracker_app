@@ -5,7 +5,7 @@ Future<Map<String, dynamic>> getSpeedTest() async {
   //TODO make enviroment variables work.
   final String ip = String.fromEnvironment("IP");
   var request = http.Request(
-      'GET', Uri.parse('http://192.168.0.105/internet-tracker/SpeedTest.php'));
+      'GET', Uri.parse(Uri.base.toString().replaceAll("/#/", "")+'/internet-tracker/SpeedTest.php'));
 
   http.StreamedResponse response = await request.send();
 
